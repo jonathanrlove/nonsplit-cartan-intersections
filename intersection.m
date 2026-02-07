@@ -51,7 +51,7 @@ end function;
 // singularity exactly once.
 // (this condition holds e.g. for p=11 at q=11.)
 
-function ArithmeticIntersection(P1,P2,p : verbose:=false)
+function ArithmeticIntersection(P1,P2,p)
 
 	QH := RationalsAsNumberField();
 	ZH := Integers(QH);
