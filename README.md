@@ -1,5 +1,4 @@
-# Arithmetic intersections on non-split Cartan modular curves
-
+# Non-split Cartan Intersections
 Accompanies the paper "Arithmetic intersections on non-split Cartan modular curves" by Jonathan Love, Elie Studnia, and Jan Vonk (arxiv identifier to be added once uploaded).
 
 ## Quick start
