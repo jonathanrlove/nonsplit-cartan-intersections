@@ -39,9 +39,9 @@ The data for these modular curves was obtained from the LMFDB, namely the follow
 For $p\in\\{2,3,5,7\\}$, the values of $p$ such that $X_{\mathrm{ns}}^+(p)\simeq \mathbb{P}^1_{\mathbb{Q}}$, the $j$-map given by the LMFDB was precomposed with a rational automorphism of $\mathbb{P}^1$ to determine a different integral structure.
 
 ### `intersection.m`
-This file contains methods for computing rational CM points on modular curves and computing arithmetic intersections of these points. See the file for documentation on how to use method.
+This file contains methods for computing rational CM points on modular curves and computing arithmetic intersections of these points. See the file for documentation on how to use each of these methods.
 
-The main methods are the following:
+The main functions are the following:
 - `CMPointList(p)` returns a list of all rational CM points on the provided model of $X_{\mathrm{ns}}^+(p)$ (i.e. all rational points for which the $j$-invariant map sends the point to the $j$-invariant of a CM discriminant).
 - `ArithmeticIntersection(P1,P2,p)` takes points $P_1,P_2\in X_{\mathrm{ns}}^+(p)(\mathbb{Q})$ as input (provided as a list of coordinates), and returns the product over all primes of $q^{m_q}$, where $m_q$ is the intersection multiplicity of $P_1$ and $P_2$ at $q$.
 - `GZFormula(D1, D2 : N:=p^2)` returns the intersection number of Heegner points on $X_{\mathrm{ns}}^+(p)$ with discriminants $D_1$ and $D_2$, computed using Theorem B.
