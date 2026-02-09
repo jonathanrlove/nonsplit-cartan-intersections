@@ -140,17 +140,26 @@ end function;
 
 
 
+// the set of positive integers of the form (D1*D2-t^2)/(4*N)
+function S(D1D2, N)
+	lst := [];
+	for t in [0..Ceiling(Sqrt(D1D2))-1] do
+		if IsDivisibleBy(D1D2-t^2,(4*N)) then
+			Append(~lst, ZZ!((D1D2-t^2)/(4*N)));
+		end if;
+	end for;
+	return lst;
+end function;
+
+
+
 // Compute arithmetic intersections of Heegner divisors. 
 function GZFormula(D1,D2 : N := 1)
 	prod := 1;
-	for t in [0..Ceiling(Sqrt(D1*D2))-1] do
-		if IsDivisibleBy(D1*D2-t^2,(4*N)) then
-			M  := ZZ!((D1*D2-t^2)/(4*N));
-			DM := &*[d^epsilon(ZZ!(M/d),D1,D2) : d in Divisors(M)];
-			prod := prod*DM;
-		end if;
-	end for;
-	
+	for M in S(D1*D2, N) do
+		DM := &*[d^epsilon(ZZ!(M/d),D1,D2) : d in Divisors(M)];
+		prod := prod*DM;
+	end for;	
 	return (ZZ!prod)^(w(D1)*w(D2));
 end function;
 
