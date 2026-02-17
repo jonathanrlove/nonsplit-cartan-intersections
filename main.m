@@ -5,7 +5,7 @@ load "intersection.m";
 print "
        Test 1: Compute intersection numbers of CM points on the provided
        models of X_{ns}^+(p), and compare each with the prediction of
-       Thereom B when applicable. 
+       Thereom B or Proposition 3.11 when applicable. 
        
        Note that there WILL be disagreement with Theorem B
        for p = 5 and D1 = -3, as there exists a non-Heegner point

@@ -344,12 +344,27 @@ end function;
 
 
 
-// Tests whether D1, D2 are coprime fundamental discriminants
-// and satisfy the (non-split) Heegner hypothesis with respect to p
-function GZapplicable(D1,D2,p)
-	return GCD(D1,D2) eq 1 
-		   and IsFundamentalDiscriminant(D1) and IsFundamentalDiscriminant(D2) 
-		   and KroneckerSymbol(D1,p) eq -1 and KroneckerSymbol(D2,p) eq -1;
+// Returns true, "Theorem B" if Theorem B applies,
+// true, "Proposition 13" if Proposition 13 applies,
+// and "" if no GZ formula applies.
+function GZapplication(D1,D2,p)
+	if not (GCD(D1,D2) eq 1 and KroneckerSymbol(D1,p) eq -1 and KroneckerSymbol(D2,p) eq -1) then
+		return "";
+	end if;
+
+	if IsFundamentalDiscriminant(D1) and IsFundamentalDiscriminant(D2) then
+		return "Theorem B";
+	end if;
+
+	d1 := FundamentalDiscriminant(D1);
+	f1 := D1 div d1;
+	d2 := FundamentalDiscriminant(D2);
+	f2 := D2 div d2;
+	if &and[GCD(f1*f2, t) eq 1 : t in S(D1*D2,p^2)] then
+		return "Proposition 3.11";
+	end if;
+
+	return "";
 end function;
 
 
@@ -419,9 +434,18 @@ procedure AllIntersections(p : latex:=false)
 			// compute arithmetic intersection
 			AIval := ArithmeticIntersection(P1, P2, p);
 
+			GZresult := GZapplication(D1,D2,p);
+
 			if latex then
 				// generate table cell entry
-				if not GZapplicable(D1,D2,p) then
+				if GZresult eq "" or t1 ne 1 or t2 ne 1 then
+					// We checked a posteriori that any point with t1 ne 1
+					// or t2 ne 1 isnot a Heegner point, even if the 
+					// discriminant satisfies the Heegner hypothesis.
+					printf "";
+				elif GZresult eq "Proposition 3.11" then
+					printf "\\color{Green} ";
+				elif GZresult eq "Theorem B" then
 					printf "\\color{blue} ";
 				end if;
 				printf " %o ", primefactprint(AIval:latex:=true);
@@ -432,14 +456,13 @@ procedure AllIntersections(p : latex:=false)
 				printf "%o", primefactprint(AIval);
 
 				// compare with Theorem B prediction
-				if GZapplicable(D1,D2,p) then
+				if GZresult ne "" then
 					GZval := GZFormula(D1,D2 : N:=p^2);
 					if GZval eq AIval then
-						print " (agrees with Theorem B)";
+						printf " (agrees with %o)\n", GZresult;
 					else
-						print "\n\nDisagrees with Theorem B!";
-						print "Theorem B prediction:",primefactprint(GZval);
-						print "";
+						printf "\n\nDisagrees with %o. (May be non-Heegner point?)\n", GZresult;
+						printf "%o prediction: %o\n\n",GZresult,primefactprint(GZval);
 					end if;
 				else
 					print "";
