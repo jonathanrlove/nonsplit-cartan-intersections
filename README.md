@@ -24,7 +24,7 @@ There are three Magma files.
 This file runs the checks described in the previous section.
 
 ### `modular_curve_db.m` 
-This file contains models for non-split Cartan modular curves $X_{\mathrm{ns}}^+(p)$ for $p \in \\{2, 3, 5, 7, 11, 13, 23\\}$. These models are cut out by a set `model_0` of $n-1$ polynomial equations in $\mathbb{P}^n$, and come equipped with a $j$-invariant map `[map_0_coord_0, map_1_coord_1]` to $\mathbb{P}^1$. By imposing the condition that the $j$-invariant map must be flat over $\mathbb{P}^1_{\mathbb{Z}}$, we obtain a uniquely determined integral model of $X_{\mathrm{ns}}^+(p)$, even in the case that the generic fibre has genus $0$.
+This file contains integral models for non-split Cartan modular curves $X_{\mathrm{ns}}^+(p)$ for $p \in \\{2, 3, 5, 7, 11, 13, 23\\}$. Specifically, for each $p$, we have a scheme $M_p$ cut out by a set `model_0` of $n-1$ polynomial equations in $\mathbb{P}^n_{\mathbb{Z}}$, together with a map $j:M_p\to \mathbb{P}^1_{\mathbb{Z}}$ defined by coordinates `[map_0_coord_0, map_1_coord_1]`. The restriction of $j$ to the generic fibre factors into an isomorphism $f: M_{\mathbb{Q}}\to X_{\mathrm{ns}}^+(p)$ followed by the (canonical) $j$-invariant map $X_{\mathrm{ns}}^+(p)\to \mathbb{P}^1_{\mathbb{Q}}$, and we use the isomorphism $f$ to interpret $M$ as an integral model of $X_{\mathrm{ns}}^+(p)$. This uniquely determines a model even in the case that $X_{\mathrm{ns}}^+(p)$ has genus $0$.
 
 The data for these modular curves was obtained from the LMFDB, namely the following pages (last accessed February 7, 2026):
 
@@ -36,7 +36,7 @@ The data for these modular curves was obtained from the LMFDB, namely the follow
 - https://beta.lmfdb.org/ModularCurve/Q/13.78.3.a.1/
 - https://beta.lmfdb.org/ModularCurve/Q/23.253.13.a.1/
 
-For $p\in\\{2,3,5,7\\}$, the values of $p$ such that $X_{\mathrm{ns}}^+(p)\simeq \mathbb{P}^1_{\mathbb{Q}}$, the $j$-map given by the LMFDB was precomposed with a rational automorphism of $\mathbb{P}^1$ to determine a different integral structure.
+For $p\in\\{2,3,5,7\\}$, the values of $p$ such that $X_{\mathrm{ns}}^+(p)\simeq \mathbb{P}^1_{\mathbb{Q}}$, the $j$-map given by the LMFDB was precomposed with a rational automorphism of $\mathbb{P}^1$ to determine a different integral structure; the choice of integral model is justified by Section 4.1 of the associated paper.
 
 ### `intersection.m`
 This file contains methods for computing rational CM points on modular curves and computing arithmetic intersections of these points. See the file for documentation on how to use each of these methods.
